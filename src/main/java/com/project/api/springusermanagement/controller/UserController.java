@@ -9,9 +9,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -32,10 +35,17 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<User> findAllByUsername(Principal principal){
-        Optional<User> usersPage = userService.findByUsername(principal.getName());
+    public ResponseEntity<?> findAllByUsername() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        return usersPage.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.noContent().build());
+        if (authentication instanceof UsernamePasswordAuthenticationToken unptAuth) {
+            String username = (String) unptAuth.getPrincipal();
+            Optional<User> usersPage = userService.findByUsername(username);
+            return usersPage.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.noContent().build());
+        } else {
+            List<User> usersList = userService.findAll();
+            return usersList == null || usersList.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(usersList);
+        }
     }
 
     @PostMapping
