@@ -7,7 +7,7 @@ El componente esta desarrollado usando Spring Boot, Spring JPA, Spring Validatio
 
 Adjunto enlace a mi drive para descargar la coleccion de Postman:
 
-[https://drive.google.com/file/d/1HoOXycg4iGWR1wwB9Y4bb6Czu0WxZEil/view?usp=sharing](https://drive.google.com/file/d/1nfyR7u0OFlNTyhRBsZn-IRoZFBw4mZNM/view?usp=sharing)
+https://drive.google.com/file/d/1Fxjwu0Clhsn09rHyPxQz6_ZYzmYfwwWD/view?usp=sharing
 
 ## Comandos para ejecutar el DockerFile:
 Dentro del repository se encuentra el archivo DockerFile para desplegar el componente en docker desktop; el puerto de salida asignado para consumir los servicios es 8585, segun se detalla en los comandos de la tabla siguiente:
