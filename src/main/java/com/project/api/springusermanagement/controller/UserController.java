@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<?> findAllByUsername() {
+    public ResponseEntity<?> findByUsername() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication instanceof UsernamePasswordAuthenticationToken unptAuth) {
